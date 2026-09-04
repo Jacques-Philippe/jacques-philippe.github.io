@@ -1,0 +1,26 @@
+{
+  "name": "personal-website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite-ssg build",
+    "typecheck": "vue-tsc --noEmit",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "beasties": "^0.3.5",
+    "prettier": "^3.3.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.2.2",
+    "vite-ssg": "^28.3.0",
+    "vue-tsc": "^3.0.0"
+  }
+}

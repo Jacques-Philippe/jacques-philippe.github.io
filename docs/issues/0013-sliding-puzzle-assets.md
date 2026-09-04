@@ -26,6 +26,13 @@ Done looks like:
   with no invented URL or date
 - Update the content-gap comment at the top of `src/data/assets.ts`
 
+## Links
+### Sliding Puzzle Kit
+Unity asset store https://assetstore.unity.com/packages/templates/packs/sliding-puzzle-kit-379986
+
+### Sliding Puzzle Factory
+Unity asset store https://assetstore.unity.com/packages/tools/game-toolkits/sliding-puzzle-factory-384312
+
 ## Notes
 
 ⚠️ Content gap: waiting on the Asset Store (and any itch.io) URLs, the

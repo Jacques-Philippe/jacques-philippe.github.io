@@ -6,7 +6,9 @@ import { thumbnail } from './thumbnails'
  *
  * Content gap: Pedometer's store URL and finished feature copy are still
  * pending, so it stays `coming-soon` — do not invent a store link or a
- * release date. The Office Asset Pack is published (issue 0012).
+ * release date. The Sliding Puzzle Kit / Factory entries are live but still
+ * missing their thumbnail art (issue 0013) — the card falls back to a
+ * placeholder panel until it lands.
  */
 export const assets: Project[] = [
   {
@@ -60,6 +62,47 @@ export const assets: Project[] = [
       'Desk and break-room props, from mugs and monitors to plants and filing cabinets',
       'Works in the Built-in, URP, and HDRP render pipelines',
       'Free starter pack, or the full collection for the complete break-room set',
+    ],
+  },
+  {
+    slug: 'sliding-puzzle-kit',
+    title: 'Sliding Puzzle Kit',
+    blurb:
+      'A complete, reskinnable sliding puzzle game template for Unity — the shuffle, slide, and solve loop wired up and ready to ship.',
+    tags: ['Unity', '2D', 'Game template'],
+    links: [
+      {
+        kind: 'store',
+        url: 'https://assetstore.unity.com/packages/templates/packs/sliding-puzzle-kit-379986',
+        label: 'Asset Store',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      'Drop-in scene with the full shuffle → slide → solve loop',
+      'Swap in your own image and board size to reskin it',
+      'Works in the Built-in, URP, and HDRP render pipelines',
+    ],
+  },
+  {
+    slug: 'sliding-puzzle-factory',
+    title: 'Sliding Puzzle Factory',
+    blurb:
+      'A Unity toolkit for building sliding puzzle games — turn a source image into a configurable sliding puzzle, tune board size and difficulty, and drop it into a mobile game.',
+    tags: ['Unity', 'Editor tool', 'Puzzle'],
+    links: [
+      {
+        kind: 'store',
+        url: 'https://assetstore.unity.com/packages/tools/game-toolkits/sliding-puzzle-factory-384312',
+        label: 'Asset Store',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      'Generate sliding puzzles from any source image',
+      'Configurable board size and difficulty',
+      'Aimed at mobile puzzle games',
+      'Works in the Built-in, URP, and HDRP render pipelines',
     ],
   },
 ]

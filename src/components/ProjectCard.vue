@@ -57,7 +57,7 @@ function linkLabel(kind: LinkKind, label?: string): string {
         decoding="async"
       />
       <div v-else class="card__placeholder" aria-hidden="true">
-        <span>In the works</span>
+        <span>{{ isComingSoon ? 'In the works' : project.title }}</span>
       </div>
       <span v-if="badge" class="card__badge">{{ badge }}</span>
     </div>

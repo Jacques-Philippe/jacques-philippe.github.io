@@ -27,6 +27,14 @@ const badge = computed(() =>
 
 const isComingSoon = computed(() => props.project.status === 'coming-soon')
 
+const PRIMARY_KINDS: LinkKind[] = ['store', 'itch']
+
+// Only the first marketplace link on a card reads as the main call to action;
+// any others (a paid tier, an alternate storefront) get the outline treatment.
+const primaryLinkIndex = computed(() =>
+  props.project.links.findIndex((link) => PRIMARY_KINDS.includes(link.kind)),
+)
+
 // No artwork, or nothing to show yet — fall back to the placeholder panel.
 const showImage = computed(
   () => !isComingSoon.value && Boolean(props.project.thumbnail),
@@ -72,10 +80,10 @@ function linkLabel(kind: LinkKind, label?: string): string {
 
       <div v-if="project.links.length" class="card__links">
         <a
-          v-for="link in project.links"
+          v-for="(link, i) in project.links"
           :key="link.url"
           class="card__link"
-          :data-kind="link.kind"
+          :class="{ 'card__link--primary': i === primaryLinkIndex }"
           :href="link.url"
           target="_blank"
           rel="noopener"
@@ -256,21 +264,19 @@ function linkLabel(kind: LinkKind, label?: string): string {
   background: var(--accent);
 }
 
-/* The primary marketplace / play links read as the main call to action. */
-.card__link[data-kind='store'],
-.card__link[data-kind='itch'] {
+/* The first marketplace / play link reads as the main call to action; any
+   further links (paid tier, alternate storefront) keep the outline style. */
+.card__link--primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-contrast);
 }
 
-.card__link[data-kind='store']::before,
-.card__link[data-kind='itch']::before {
+.card__link--primary::before {
   background: var(--accent-contrast);
 }
 
-.card__link[data-kind='store']:hover,
-.card__link[data-kind='itch']:hover {
+.card__link--primary:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
   color: var(--accent-contrast);

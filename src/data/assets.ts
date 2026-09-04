@@ -4,9 +4,9 @@ import { thumbnail } from './thumbnails'
 /*
  * Unity Asset Store packages (see docs/adr/0003).
  *
- * Content gap (issue 0009): the real Asset Store URLs and finished feature
- * copy are still pending. Entries are scaffolded honestly as `coming-soon`
- * until that lands — do not invent a store link or a release date.
+ * Content gap: Pedometer's store URL and finished feature copy are still
+ * pending, so it stays `coming-soon` — do not invent a store link or a
+ * release date. The Office Asset Pack is published (issue 0012).
  */
 export const assets: Project[] = [
   {
@@ -34,9 +34,32 @@ export const assets: Project[] = [
     slug: 'office-asset-pack',
     title: 'Office Asset Pack',
     blurb:
-      'A Unity Asset Store package of modular office environment assets, currently in development.',
-    tags: ['Unity', '3D assets'],
-    links: [],
-    status: 'coming-soon',
+      'A low-poly office and break-room pack for Unity — modular cubicle partitions and desks, plus the props to dress them: monitors, laptops, lamps, potted plants, filing cabinets, and printers.',
+    thumbnail: thumbnail('office-asset-pack.png'),
+    tags: ['Unity', 'Low poly', '3D environment'],
+    links: [
+      {
+        kind: 'store',
+        url: 'https://assetstore.unity.com/packages/3d/environments/industrial/low-poly-office-pack-394148',
+        label: 'Asset Store · Free',
+      },
+      {
+        kind: 'store',
+        url: 'https://assetstore.unity.com/packages/3d/props/interior/office-pack-full-complete-low-poly-office-break-room-collection-396892',
+        label: 'Asset Store · Full',
+      },
+      {
+        kind: 'itch',
+        url: 'https://fromqcwithgamedev.itch.io/office-low-poly-pack',
+        label: 'itch.io',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      'Modular cubicle partitions, desks, and seating for open-plan office layouts',
+      'Desk and break-room props, from mugs and monitors to plants and filing cabinets',
+      'Works in the Built-in, URP, and HDRP render pipelines',
+      'Free starter pack, or the full collection for the complete break-room set',
+    ],
   },
 ]

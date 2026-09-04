@@ -16,10 +16,10 @@ Done looks like:
 - Thumbnail added to `assets/images/` (e.g. `office-asset-pack.png`) and wired
   through the `thumbnail()` resolver
 - All four marketplace URLs added to `links[]`:
-  - Unity Asset Store — free (`kind: 'store'`)
-  - Unity Asset Store — paid (`kind: 'store'`)
-  - itch.io — free (`kind: 'itch'`)
-  - itch.io — paid (`kind: 'itch'`)
+  - Unity Asset Store — free (`kind: 'store'`) `https://assetstore.unity.com/packages/3d/environments/industrial/low-poly-office-pack-394148`
+  - Unity Asset Store — paid (`kind: 'store'`) `https://assetstore.unity.com/packages/3d/props/interior/office-pack-full-complete-low-poly-office-break-room-collection-396892`
+  - itch.io — free (`kind: 'itch'`) `https://fromqcwithgamedev.itch.io/office-low-poly-pack`
+  - itch.io — paid (`kind: 'itch'`) `https://fromqcwithgamedev.itch.io/office-low-poly-pack`
 - Each link carries a `label` that names the marketplace **and** the variant,
   since `kind` alone no longer disambiguates (e.g. "Asset Store · Free",
   "Asset Store · Pro", "itch.io · Free", "itch.io · Pro")

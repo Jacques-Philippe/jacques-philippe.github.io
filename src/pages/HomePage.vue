@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import { useHead } from '@unhead/vue'
+
+// Client-only: keeps the component and `three` out of the SSR pass and the
+// initial homepage bundle. The CSS gradient on .hero__bg covers until it loads.
+const HeroCanvas = defineAsyncComponent(
+  () => import('../components/HeroCanvas.vue'),
+)
 
 useHead({
   title: 'Jacques-Philippe Amiot',
@@ -38,7 +45,9 @@ const explore = [
       is the default and the WebGL/reduced-motion fallback; the canvas layers
       on top when it lands.
     -->
-    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__bg" aria-hidden="true">
+      <HeroCanvas />
+    </div>
 
     <div class="container hero__inner">
       <h1 class="hero__title">

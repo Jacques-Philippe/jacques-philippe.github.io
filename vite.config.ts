@@ -15,5 +15,11 @@ export default defineConfig({
   // vite-ssg options
   ssgOptions: {
     formatting: 'minify',
+    // We hand-pick font preloads in App.vue; stop beasties from auto-preloading
+    // every @font-face subset (cyrillic, greek, vietnamese, …).
+    beastiesOptions: {
+      preloadFonts: false,
+      fonts: false,
+    },
   },
 })

@@ -35,7 +35,11 @@ Unity asset store https://assetstore.unity.com/packages/tools/game-toolkits/slid
 
 ## Notes
 
-⚠️ Content gap: waiting on the Asset Store (and any itch.io) URLs, the
-thumbnail assets, and feature copy from Jacques. Scaffold both as
-`coming-soon` until provided — the card already has an honest placeholder
-state for that.
+Both entries are in `src/data/assets.ts` as `released` with their Asset Store
+links, blurbs, and highlights (commit "Add Sliding Puzzle Kit and Sliding
+Puzzle Factory"). Neither is on itch.io.
+
+⚠️ Still outstanding: the two thumbnail images. Add
+`assets/images/sliding-puzzle-kit.*` and `assets/images/sliding-puzzle-factory.*`,
+wire each through `thumbnail()`, and this issue is done. Until then the cards
+fall back to the title placeholder panel.

@@ -4,7 +4,7 @@ import { useHead } from '@unhead/vue'
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url'
 import groteskWoff2 from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
 
-// AppShell (nav, footer, theme toggle) arrives in issue 0003.
+import AppShell from './components/AppShell.vue'
 
 useHead({
   link: [
@@ -27,5 +27,7 @@ useHead({
 </script>
 
 <template>
-  <RouterView />
+  <AppShell>
+    <RouterView />
+  </AppShell>
 </template>

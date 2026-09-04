@@ -5,8 +5,8 @@ useHead({ title: 'Assets — Jacques-Philippe Amiot' })
 </script>
 
 <template>
-  <main>
+  <section class="container">
     <h1>Assets</h1>
     <p>Placeholder — content lands in issue 0009.</p>
-  </main>
+  </section>
 </template>

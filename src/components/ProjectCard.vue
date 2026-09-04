@@ -27,6 +27,11 @@ const badge = computed(() =>
 
 const isComingSoon = computed(() => props.project.status === 'coming-soon')
 
+// No artwork, or nothing to show yet — fall back to the placeholder panel.
+const showImage = computed(
+  () => !isComingSoon.value && Boolean(props.project.thumbnail),
+)
+
 function linkLabel(kind: LinkKind, label?: string): string {
   return label ?? LINK_LABELS[kind]
 }
@@ -36,7 +41,7 @@ function linkLabel(kind: LinkKind, label?: string): string {
   <article class="card" :class="`card--${project.status}`">
     <div class="card__media">
       <img
-        v-if="!isComingSoon"
+        v-if="showImage"
         class="card__image"
         :src="project.thumbnail"
         :alt="`${project.title} thumbnail`"

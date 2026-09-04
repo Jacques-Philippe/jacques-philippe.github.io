@@ -24,8 +24,12 @@ export interface Project {
   title: string
   /** One or two sentences of plain-language summary. */
   blurb: string
-  /** Filename under assets/images — resolved via {@link thumbnail}. */
-  thumbnail: string
+  /**
+   * Filename under assets/images — resolved via {@link thumbnail}. Optional:
+   * coming-soon projects (and anything without artwork yet) render a
+   * placeholder instead.
+   */
+  thumbnail?: string
   tags: string[]
   links: Link[]
   status: Status

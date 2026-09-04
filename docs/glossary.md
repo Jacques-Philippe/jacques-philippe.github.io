@@ -69,6 +69,14 @@ both UI accents and the HeroCanvas shader palette.
 A CSS custom property in the global style layer (colour, type scale, spacing,
 radius). The source of the "slick" refresh; components consume tokens only.
 
+**Issue**:
+A unit of planned work, one Markdown file under `docs/issues/`. Named
+`NNNN-slug.md` with a stable sequential number. An open issue lives directly in
+`docs/issues/`; a finished one is `git mv`d into `docs/issues/done/` keeping its
+number. Location is the only status signal — there is no index file and no
+status frontmatter.
+_Avoid_: ticket, task, story, card.
+
 **Redirect stub**:
 A minimal generated `.html` file at a legacy path (`games.html`, `tools.html`,
 `about.html`) that forwards to the new clean route. Preserves inbound links

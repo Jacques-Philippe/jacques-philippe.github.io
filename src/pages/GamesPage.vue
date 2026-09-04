@@ -1,12 +1,27 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
+import PageHeader from '../components/PageHeader.vue'
+import ProjectGrid from '../components/ProjectGrid.vue'
+import { games } from '../data/games'
 
-useHead({ title: 'Games — Jacques-Philippe Amiot' })
+useHead({
+  title: 'Games — Jacques-Philippe Amiot',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Games Jacques-Philippe Amiot has worked on, from prototypes to released titles.',
+    },
+  ],
+})
 </script>
 
 <template>
   <section class="container">
-    <h1>Games</h1>
-    <p>Placeholder — content lands in issue 0007.</p>
+    <PageHeader
+      title="Games"
+      lede="Projects I've worked on, from prototypes to released titles."
+    />
+    <ProjectGrid :projects="games" />
   </section>
 </template>

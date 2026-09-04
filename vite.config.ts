@@ -15,6 +15,9 @@ export default defineConfig({
   // vite-ssg options
   ssgOptions: {
     formatting: 'minify',
+    // Emit routes as games/index.html, not games.html, so the legacy
+    // redirect stubs in public/ can own games.html / tools.html / about.html.
+    dirStyle: 'nested',
     // We hand-pick font preloads in App.vue; stop beasties from auto-preloading
     // every @font-face subset (cyrillic, greek, vietnamese, …).
     beastiesOptions: {

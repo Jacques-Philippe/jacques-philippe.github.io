@@ -1,7 +1,7 @@
 # personal-website
 
 Personal site of Jacques-Philippe Amiot — Vue 3 + Vite, prerendered to static
-HTML with `vite-ssg`, hosted on GitHub Pages at `jacquespamiot.github.io`.
+HTML with `vite-ssg`, hosted on GitHub Pages at `jacques-philippe.github.io`.
 
 ## Develop
 

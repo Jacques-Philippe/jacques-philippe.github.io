@@ -6,9 +6,7 @@ import { thumbnail } from './thumbnails'
  *
  * Content gap: Pedometer's store URL and finished feature copy are still
  * pending, so it stays `coming-soon` — do not invent a store link or a
- * release date. The Sliding Puzzle Kit / Factory entries are live but still
- * missing their thumbnail art (issue 0013) — the card falls back to a
- * placeholder panel until it lands.
+ * release date. Everything else here is published.
  */
 export const assets: Project[] = [
   {
@@ -68,8 +66,9 @@ export const assets: Project[] = [
     slug: 'sliding-puzzle-kit',
     title: 'Sliding Puzzle Kit',
     blurb:
-      'A complete, reskinnable sliding puzzle game template for Unity — the shuffle, slide, and solve loop wired up and ready to ship.',
-    tags: ['Unity', '2D', 'Game template'],
+      'A Unity tool for building your own sliding puzzle games — set up the board, tiles, and the shuffle-and-solve rules without writing the core logic yourself.',
+    thumbnail: thumbnail('sliding-puzzle-toolkit.png'),
+    tags: ['Unity', '2D', 'Puzzle'],
     links: [
       {
         kind: 'store',
@@ -79,8 +78,8 @@ export const assets: Project[] = [
     ],
     status: 'released',
     highlights: [
-      'Drop-in scene with the full shuffle → slide → solve loop',
-      'Swap in your own image and board size to reskin it',
+      'Configurable board size and tile set',
+      'Shuffle, slide, and solve logic handled for you',
       'Works in the Built-in, URP, and HDRP render pipelines',
     ],
   },
@@ -88,7 +87,8 @@ export const assets: Project[] = [
     slug: 'sliding-puzzle-factory',
     title: 'Sliding Puzzle Factory',
     blurb:
-      'A Unity toolkit for building sliding puzzle games — turn a source image into a configurable sliding puzzle, tune board size and difficulty, and drop it into a mobile game.',
+      'The Sliding Puzzle Kit scaled up into a production pipeline — turn source images into fully configured sliding puzzles in bulk and feed them straight into a mobile game.',
+    thumbnail: thumbnail('sliding-puzzle-toolkit-factory.png'),
     tags: ['Unity', 'Editor tool', 'Puzzle'],
     links: [
       {
@@ -99,9 +99,9 @@ export const assets: Project[] = [
     ],
     status: 'released',
     highlights: [
-      'Generate sliding puzzles from any source image',
-      'Configurable board size and difficulty',
-      'Aimed at mobile puzzle games',
+      'Generate configured sliding puzzles from source images',
+      'Batch production for content-heavy puzzle games',
+      'Built with mobile in mind',
       'Works in the Built-in, URP, and HDRP render pipelines',
     ],
   },

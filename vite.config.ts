@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// User-pages repo (jacquespamiot.github.io) is served from the domain root.
+// User-pages repo (jacques-philippe.github.io) is served from the domain root.
 export default defineConfig({
   base: '/',
   plugins: [vue()],

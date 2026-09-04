@@ -2,7 +2,7 @@
 
 The personal website of Jacques-Philippe Amiot (FromQCWithGameDev), a Unity
 developer. A static portfolio site hosted on GitHub Pages at
-`jacquespamiot.github.io`.
+`jacques-philippe.github.io`.
 
 ## Language
 

@@ -1,0 +1,8 @@
+/* Global style entry — imported once from src/main.ts. */
+
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/space-grotesk';
+
+@import './tokens.css';
+@import './reset.css';
+@import './base.css';

@@ -2,71 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Jacques-Philippe Amiot (FromQCWithGameDev)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Pico.css -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    <title>Jacques-Philippe Amiot</title>
+    <meta
+      name="description"
+      content="Jacques-Philippe Amiot — Unity developer working on games, tools, and Asset Store packages."
     />
-
-    <style>
-      /* Light customization on top of Pico */
-
-      header {
-        margin-bottom: 3rem;
-      }
-
-      .intro {
-        max-width: 720px;
-        margin: 4rem auto;
-        text-align: center;
-      }
-
-      .intro h1 {
-        margin-bottom: 0.5rem;
-      }
-
-      .intro p {
-        font-size: 1.1rem;
-        color: var(--muted-color);
-      }
-
-      nav ul {
-        justify-content: center;
-      }
-    </style>
+    <script>
+      // Resolve theme before first paint to avoid a flash of the wrong colours.
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
   </head>
   <body>
-    <!-- NAVIGATION TABS -->
-    <nav class="container-fluid">
-      <ul>
-        <li><strong>Jacques-Philippe Amiot</strong></li>
-      </ul>
-      <ul>
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="games.html">Games</a></li>
-        <li><a href="tools.html">Tools</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-
-    <!-- INTRODUCTION -->
-    <main class="container">
-      <section class="intro">
-        <h1>Hi, I’m Jacques 👋</h1>
-        <p>
-          I’m a Unity developer working on games and tools, with a focus on
-          clean systems, gameplay architecture, and practical production-ready
-          code.
-        </p>
-
-        <p>
-          This site is a home for projects I’ve worked on — games, videos, and
-          experiments.
-        </p>
-      </section>
-    </main>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

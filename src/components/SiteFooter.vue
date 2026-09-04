@@ -1,31 +1,7 @@
 <script setup lang="ts">
-interface SocialLink {
-  label: string;
-  href: string;
-  text: string;
-}
+import { socials, isExternal } from '../data/socials'
 
-// Contact / social links carried over from the legacy about.html.
-const links: SocialLink[] = [
-  { label: "Email", href: "mailto:jacques.p.amiot@gmail.com", text: "Email" },
-  {
-    label: "GitHub",
-    href: "https://github.com/Jacques-Philippe",
-    text: "GitHub",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/jacques-philippe-amiot-757a90116/",
-    text: "LinkedIn",
-  },
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/@FromQCWithGameDev",
-    text: "YouTube",
-  },
-];
-
-const year = new Date().getFullYear();
+const year = new Date().getFullYear()
 </script>
 
 <template>
@@ -33,13 +9,13 @@ const year = new Date().getFullYear();
     <div class="container footer__inner">
       <p class="footer__copy">© {{ year }} Jacques-Philippe Amiot</p>
       <ul class="footer__links">
-        <li v-for="link in links" :key="link.label">
+        <li v-for="link in socials" :key="link.label">
           <a
             :href="link.href"
-            :rel="link.href.startsWith('http') ? 'me noopener' : undefined"
-            :target="link.href.startsWith('http') ? '_blank' : undefined"
+            :rel="isExternal(link.href) ? 'me noopener' : undefined"
+            :target="isExternal(link.href) ? '_blank' : undefined"
           >
-            {{ link.text }}
+            {{ link.label }}
           </a>
         </li>
       </ul>

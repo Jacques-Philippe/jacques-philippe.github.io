@@ -1,41 +1,41 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-import { useHead } from '@unhead/vue'
+import { defineAsyncComponent } from "vue";
+import { useHead } from "@unhead/vue";
 
 // Client-only: keeps the component and `three` out of the SSR pass and the
 // initial homepage bundle. The CSS gradient on .hero__bg covers until it loads.
 const HeroCanvas = defineAsyncComponent(
-  () => import('../components/HeroCanvas.vue'),
-)
+  () => import("../components/HeroCanvas.vue"),
+);
 
 useHead({
-  title: 'Jacques-Philippe Amiot',
+  title: "Jacques-Philippe Amiot",
   meta: [
     {
-      name: 'description',
+      name: "description",
       content:
-        'Jacques-Philippe Amiot — Unity developer working on games, tools, and Asset Store packages.',
+        "Jacques-Philippe Amiot — Unity developer working on games, tools, and Asset Store packages.",
     },
   ],
-})
+});
 
 const explore = [
   {
-    to: '/games',
-    title: 'Games',
-    blurb: 'Playable titles and prototypes, from game jams to released builds.',
+    to: "/games",
+    title: "Games",
+    blurb: "Playable titles and prototypes, from game jams to released builds.",
   },
   {
-    to: '/tools',
-    title: 'Tools',
-    blurb: 'Open-source developer software built around real production needs.',
+    to: "/tools",
+    title: "Tools",
+    blurb: "Software built around real production needs.",
   },
   {
-    to: '/assets',
-    title: 'Assets',
-    blurb: 'Unity Asset Store packages made for other Unity developers.',
+    to: "/assets",
+    title: "Assets",
+    blurb: "Unity Asset Store packages.",
   },
-]
+];
 </script>
 
 <template>

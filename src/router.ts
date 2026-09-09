@@ -6,5 +6,6 @@ export const routes: RouteRecordRaw[] = [
   { path: '/games', name: 'games', component: () => import('./pages/GamesPage.vue') },
   { path: '/tools', name: 'tools', component: () => import('./pages/ToolsPage.vue') },
   { path: '/assets', name: 'assets', component: () => import('./pages/AssetsPage.vue') },
+  { path: '/meshes', name: 'meshes', component: () => import('./pages/MeshesPage.vue') },
   { path: '/about', name: 'about', component: () => import('./pages/AboutPage.vue') },
 ]

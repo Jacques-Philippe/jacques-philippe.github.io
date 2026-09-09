@@ -23,5 +23,27 @@ useHead({
       lede="Unity Asset Store packages I've developed."
     />
     <ProjectGrid :projects="assets" />
+
+    <p class="assets-meshes-link">
+      Want a closer look at the models?
+      <RouterLink to="/meshes">Browse the mesh gallery →</RouterLink>
+    </p>
   </section>
 </template>
+
+<style scoped>
+.assets-meshes-link {
+  margin: var(--space-7) 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.assets-meshes-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.assets-meshes-link a:hover {
+  text-decoration: underline;
+}
+</style>

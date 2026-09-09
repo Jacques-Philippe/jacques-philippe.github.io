@@ -63,6 +63,9 @@ async function setup() {
   const { MeshoptDecoder } = await import(
     'three/examples/jsm/libs/meshopt_decoder.module.js'
   )
+  const { RoomEnvironment } = await import(
+    'three/examples/jsm/environments/RoomEnvironment.js'
+  )
   if (disposed) return
 
   try {
@@ -72,9 +75,19 @@ async function setup() {
     return
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.toneMappingExposure = 1
 
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(38, 1, 0.01, 100)
+
+  // Image-based lighting so the PBR materials — matte panels and, especially,
+  // the metallic chrome/aluminium parts — actually read as their material
+  // rather than flat grey. The per-pack directional rig below adds the
+  // DESIGN.md §8 key/fill direction and warmth on top.
+  const pmrem = new THREE.PMREMGenerator(renderer)
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
+  pmrem.dispose()
 
   controls = new OrbitControls(camera, el)
   controls.enablePan = false
@@ -260,6 +273,7 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(raf)
   window.removeEventListener('resize', resize)
   clearCurrent()
+  scene?.environment?.dispose()
   controls?.dispose()
   loaded.forEach((s) =>
     s.traverse((obj) => {

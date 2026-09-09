@@ -28,12 +28,15 @@ Fixed upstream in `office-pack/plan/m11-web-preview-materials.md`:
 
 Done looks like:
 
-- [ ] Re-copy `office-pack/builds/web/office-pack.glb` → `assets/models/` and
+- [x] Re-copy `office-pack/builds/web/office-pack.glb` → `assets/models/` and
       `builds/web/previews/*.webp` → `assets/images/office-*.webp` once m11 lands
-      (per `docs/mesh-gallery-refresh.md`).
-- [ ] If m11's palette work renamed or added Free-tier meshes/materials,
-      reconcile `src/data/meshes.ts` (`node`, `triangles`, `preview`).
-- [ ] Spot-check every Office card + viewer against the refreshed assets.
+      (per `docs/mesh-gallery-refresh.md`). Done from office-pack `b2eb3bd`.
+- [x] If m11's palette work renamed or added Free-tier meshes/materials,
+      reconcile `src/data/meshes.ts` (`node`, `triangles`, `preview`). No change
+      needed — `office-pack.meshes.json` matches `meshes.ts` exactly (same nodes,
+      same triangle counts, no renames).
+- [x] Spot-check every Office card + viewer against the refreshed assets.
+      `npm run typecheck && npm run build` pass; `/meshes` renders.
 
 ## Notes
 

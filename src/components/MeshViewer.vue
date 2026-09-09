@@ -75,18 +75,22 @@ async function setup() {
     return
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  // Khronos PBR Neutral: built for product/asset viewers — tone-maps
+  // highlights without the hue shift and desaturation ACES applies, so the
+  // flat kit.json colours render at their true value.
+  renderer.toneMapping = THREE.NeutralToneMapping
   renderer.toneMappingExposure = 1
 
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(38, 1, 0.01, 100)
 
   // Image-based lighting so the PBR materials — matte panels and, especially,
-  // the metallic chrome/aluminium parts — actually read as their material
-  // rather than flat grey. The per-pack directional rig below adds the
-  // DESIGN.md §8 key/fill direction and warmth on top.
+  // the metallic chrome/aluminium parts — read as their material rather than
+  // flat grey. Kept low so it fills shadows without washing the mid-tones out;
+  // the per-pack directional rig below carries the DESIGN.md §8 key direction.
   const pmrem = new THREE.PMREMGenerator(renderer)
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
+  scene.environmentIntensity = 0.5
   pmrem.dispose()
 
   controls = new OrbitControls(camera, el)

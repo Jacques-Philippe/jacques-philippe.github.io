@@ -50,11 +50,11 @@ export const PACKS: Record<PackId, Pack> = {
       href: 'https://assetstore.unity.com/packages/3d/environments/industrial/low-poly-office-pack-394148',
     },
     lighting: {
-      // ~6500 K cool-neutral daylight key, neutral grey fill. Intensities are
-      // low because RoomEnvironment IBL does most of the lifting.
-      key: { color: 0xfff4e8, intensity: 1.4, position: [4, 6, 5] },
-      fill: { color: 0xdfe7f0, intensity: 0.35, position: [-5, 2, -4] },
-      ambient: { color: 0xffffff, intensity: 0.12 },
+      // ~6500 K cool-neutral daylight key, neutral grey fill. IBL fills the
+      // shadows; these give the mesh its form and a clean highlight.
+      key: { color: 0xfff4e8, intensity: 2.2, position: [4, 6, 5] },
+      fill: { color: 0xdfe7f0, intensity: 0.5, position: [-5, 2, -4] },
+      ambient: { color: 0xffffff, intensity: 0.15 },
       background: 0x12181f,
     },
   },
@@ -66,11 +66,11 @@ export const PACKS: Record<PackId, Pack> = {
     // The Warehouse Pack has no marketplace page yet — funnel to the Assets page.
     cta: { label: 'See the Warehouse Pack →', href: '/assets' },
     lighting: {
-      // ~6000 K daylight key with a warm ~3000 K high-bay fill. Low
-      // intensities — RoomEnvironment IBL does most of the lifting.
-      key: { color: 0xfff1df, intensity: 1.4, position: [4, 6, 5] },
-      fill: { color: 0xffd8a8, intensity: 0.45, position: [-5, 3, -4] },
-      ambient: { color: 0xffffff, intensity: 0.1 },
+      // ~6000 K daylight key with a warm ~3000 K high-bay fill. IBL fills the
+      // shadows; these give the mesh its form and a clean highlight.
+      key: { color: 0xfff1df, intensity: 2.2, position: [4, 6, 5] },
+      fill: { color: 0xffd8a8, intensity: 0.6, position: [-5, 3, -4] },
+      ambient: { color: 0xffffff, intensity: 0.12 },
       background: 0x14140f,
     },
   },

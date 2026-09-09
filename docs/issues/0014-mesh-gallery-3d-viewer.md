@@ -139,40 +139,40 @@ Done looks like:
 
 **In this repo:**
 
-- [ ] `office-pack.glb` and `warehouse-pack.glb` committed under `assets/`
+- [x] `office-pack.glb` and `warehouse-pack.glb` committed under `assets/`
       (e.g. `assets/models/`) and loaded through Vite's asset pipeline via a
       `?url` import — same as the card thumbnails, so a pack update
       content-hashes the URL and busts the cache. Not `public/` (unhashed,
       stale on update). Plus a short doc of the manual refresh steps.
-- [ ] `src/data/meshes.ts` — the mesh manifest: `slug` (flat, globally
+- [x] `src/data/meshes.ts` — the mesh manifest: `slug` (flat, globally
       unique), display name, pack, `.glb` + node reference, thumbnail,
       triangle count. No `category`.
-- [ ] ~25 card thumbnails added under `assets/images/` — the web-sized
+- [x] ~25 card thumbnails added under `assets/images/` — the web-sized
       `builds/web/previews/*.webp` from each pack's export (already ~640 px,
       ~10–40 KB; the raw ~1–2 MB Blender renders stay in the pack repos),
       resolving through `thumbnails.ts`. The manifest's `preview` field names
       the file per mesh.
-- [ ] `/meshes` route in `router.ts`; `Meshes` entry in `nav-links.ts`; a link
+- [x] `/meshes` route in `router.ts`; `Meshes` entry in `nav-links.ts`; a link
       to it from `AssetsPage.vue`.
-- [ ] `<MeshGallery>` — grid of mesh-cards, segmented pack filter + name
+- [x] `<MeshGallery>` — grid of mesh-cards, segmented pack filter + name
       search, filter state synced to the URL query, empty state.
-- [ ] `MeshCard` — focusable `<button>`: preview PNG, name, pack badge,
+- [x] `MeshCard` — focusable `<button>`: preview PNG, name, pack badge,
       triangle count.
-- [ ] `<MeshViewerDialog>` — modal shell: `role="dialog"` / `aria-modal` /
+- [x] `<MeshViewerDialog>` — modal shell: `role="dialog"` / `aria-modal` /
       focus trap / Escape / focus restore, open+close transition (reduced-
       motion aware), full-screen sheet under 640px, prev/next (buttons +
       ←/→, frozen list, no wrap), chrome (name, `n / N`, triangle count, pack
       label, wireframe toggle, marketplace CTA, close), `?mesh=` sync via
       history `replace`, deep-link-vs-filter "mesh wins" handling, loading /
       WebGL-unavailable / fetch-failure states over the preview PNG.
-- [ ] `<MeshViewer>` — Three.js renderer: lazy `three` import, one persistent
+- [x] `<MeshViewer>` — Three.js renderer: lazy `three` import, one persistent
       `WebGLRenderer`, `GLTFLoader`, `OrbitControls` (`enablePan = false`,
       slow `autoRotate` off under reduced-motion + paused on drag),
       bounds-framed camera, `DESIGN.md` §8-ish lighting, wireframe mode,
       geometry dispose/swap on mesh change, both `.glb` fetched on mount.
-- [ ] Page `<head>` (title + description) via `useHead`, matching the other
+- [x] Page `<head>` (title + description) via `useHead`, matching the other
       pages.
-- [ ] [ADR-0007](../adr/0007-mesh-gallery-viewer.md) — written (done).
+- [x] [ADR-0007](../adr/0007-mesh-gallery-viewer.md) — written (done).
 
 ## Notes
 

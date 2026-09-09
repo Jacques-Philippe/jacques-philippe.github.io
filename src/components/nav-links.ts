@@ -9,5 +9,6 @@ export const navLinks: NavLink[] = [
   { to: '/games', label: 'Games' },
   { to: '/tools', label: 'Tools' },
   { to: '/assets', label: 'Assets' },
+  { to: '/meshes', label: 'Meshes' },
   { to: '/about', label: 'About' },
 ]

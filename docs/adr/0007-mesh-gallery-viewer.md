@@ -27,11 +27,23 @@ and quantized with `gltfpack -cc` (Meshopt). glTF is Three.js's native format;
 Meshopt gives Draco-class size with a ~10 KB shared decoder and much faster
 decode. These meshes compress hard — low-poly, no textures or UVs, just the
 flat `kit.json` material palette as PBR factors — so a whole pack lands well
-under 300 KB. Two small files are committed straight into this repo alongside a
-generated manifest (`src/data/meshes.ts`); no CDN, no separate assets branch,
-nowhere near GitHub Pages limits. The export runs in the pack repos and its
+under 300 KB. Two small files are committed under `assets/` (loaded through
+Vite's asset pipeline with a `?url` import, like the card thumbnails, so a pack
+update content-hashes the URL — not `public/`, which would leave a stale `.glb`
+in caches) alongside a generated manifest (`src/data/meshes.ts`); no CDN, no
+separate assets branch, nowhere near GitHub Pages limits. The export runs in the pack repos and its
 output is copied here manually, the same way `assets.ts` marketing copy is
-sourced today — CI here has no access to the pack repos.
+sourced today — CI here has no access to the pack repos, and even if it did,
+building the `.glb` runs the asset *generators*, which are the paid tier's
+source, so a public-site build must never touch them.
+
+Committing the artifact to this public repo is safe: the `.glb` holds Free-tier
+geometry only (the export filters to `kit.json` `tiers.free.assets`), byte-for-byte
+what the live viewer already ships to every visitor's browser. The paid meshes'
+geometry is never in the bundle, their names never reach `src/data/meshes.ts`,
+and their generator source never leaves the private pack repos. Card thumbnails
+are committed as ~640 px WebP (the pack export downscales them), not the ~1–2 MB
+Blender renders, which stay in the pack repos.
 
 ## A modal viewer, not a route; one persistent WebGL context
 

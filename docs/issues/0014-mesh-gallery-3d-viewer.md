@@ -115,14 +115,22 @@ Done looks like:
 
 **In the pack repos** (`office-pack`, `warehouse-pack`):
 
-- [ ] A web-export script/target in each repo that takes the Free-tier asset
+- [x] A web-export script/target in each repo that takes the Free-tier asset
       list from `kit.json` and emits **one `.glb` per pack** — every Free mesh
       as a named node, run through `gltfpack -cc` (Meshopt + quantization,
       `-vp 12 -vn 8`, no UVs/tangents/vertex-colours/animation, PBR factors
       only). Wired into the repo's existing Blender script flow.
-- [ ] A preview-render pass covering every Free-tier mesh that lacks a
-      `previews/*.png` today.
-- [ ] Repo docs updated to describe the new web-export target: `README.md`
+      `etc/build_web_glb.py` + `blender/export_web_glb.py` in each pack repo;
+      output `builds/web/<pack>.glb` + `<pack>.meshes.json` (node, triangle
+      count, preview filename) + `builds/web/previews/*.webp` (~640 px, ~10–40
+      KB), all gitignored, copied here by hand. Needs `gltfpack` (`npm i -g
+      gltfpack`).
+- [x] A preview-render pass covering every Free-tier mesh that lacks a
+      `previews/*.png` today. warehouse-pack: `build_web_glb.py` renders all 15
+      Free previews coloured (from the in-scene build) and emits the WebP
+      thumbnails. office-pack: all 10 already had `previews/*.png`; the export
+      downscales them to WebP.
+- [x] Repo docs updated to describe the new web-export target: `README.md`
       (that a web `.glb` is now a build output and what it's for) and the
       agent-facing doc (`CLAUDE.md`, plus `CONTEXT.md` for warehouse-pack) —
       how to run it, the `gltfpack` dependency, and that the personal-website
@@ -131,13 +139,19 @@ Done looks like:
 
 **In this repo:**
 
-- [ ] `office-pack.glb` and `warehouse-pack.glb` committed (to `public/` or
-      `assets/`), plus a short doc of the manual refresh steps.
+- [ ] `office-pack.glb` and `warehouse-pack.glb` committed under `assets/`
+      (e.g. `assets/models/`) and loaded through Vite's asset pipeline via a
+      `?url` import — same as the card thumbnails, so a pack update
+      content-hashes the URL and busts the cache. Not `public/` (unhashed,
+      stale on update). Plus a short doc of the manual refresh steps.
 - [ ] `src/data/meshes.ts` — the mesh manifest: `slug` (flat, globally
       unique), display name, pack, `.glb` + node reference, thumbnail,
       triangle count. No `category`.
-- [ ] ~25 card thumbnails added under `assets/images/` (from each pack's
-      `previews/`), resolving through `thumbnails.ts`.
+- [ ] ~25 card thumbnails added under `assets/images/` — the web-sized
+      `builds/web/previews/*.webp` from each pack's export (already ~640 px,
+      ~10–40 KB; the raw ~1–2 MB Blender renders stay in the pack repos),
+      resolving through `thumbnails.ts`. The manifest's `preview` field names
+      the file per mesh.
 - [ ] `/meshes` route in `router.ts`; `Meshes` entry in `nav-links.ts`; a link
       to it from `AssetsPage.vue`.
 - [ ] `<MeshGallery>` — grid of mesh-cards, segmented pack filter + name
@@ -198,9 +212,11 @@ implementation.
   it once, rather than one request per mesh. Pipeline: Blender
   `export_scene.gltf(format='GLB')` → `gltfpack -cc` in each repo's existing
   script flow; no `fbx2gltf` / Draco needed.
-- **Hosting.** Two small `.glb` files — commit directly to `public/` (or
-  `assets/`). No CDN, no separate assets branch, nowhere near GitHub Pages
-  limits.
+- **Hosting.** Two small `.glb` files — commit under `assets/` (e.g.
+  `assets/models/`) and load them through Vite's asset pipeline with a `?url`
+  import, the same as the card thumbnails, so a pack update content-hashes the
+  URL. Not `public/` (unhashed — a stale `.glb` would sit in caches after a
+  refresh). No CDN, no separate assets branch, nowhere near GitHub Pages limits.
 - **Where the conversion runs.** The `.glb` is produced **in each pack repo**
   as a normal build output (a new export target restricted to the Free-tier
   asset list) and copied into this repo alongside the manifest, mirroring how

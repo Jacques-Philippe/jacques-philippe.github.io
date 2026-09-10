@@ -37,12 +37,14 @@ Done looks like:
 
 - itch.io (`kind: 'itch'`) — free + paid tiers, one page:
   `https://fromqcwithgamedev.itch.io/warehouse-pack-low-poly-warehouse-logistics-collection`
-- Unity Asset Store (`kind: 'store'`) — _TBD from Jacques, if published there;
-  otherwise omit and this stays a single-link card._
+- Trailer (`kind: 'video'`) — `https://youtu.be/4b0AskV1DXw`, label "Trailer"
+
+Not on the Unity Asset Store yet — no `kind: 'store'` link. Card carries the
+itch.io button plus the trailer link.
 
 ## Draft copy
 
-**blurb:** A low-poly warehouse and logistics pack for Unity — 147 flat-colour
+**blurb:** A low-poly warehouse and logistics pack — 147 flat-colour
 props covering pallet racking, loading docks, packing stations, forklifts and
 pallet jacks, plus the staff-room and signage details to finish the scene.
 
@@ -57,10 +59,8 @@ pallet jacks, plus the staff-room and signage details to finish the scene.
 
 **tags[]:** `Unity`, `Low poly`, `3D environment`
 
-**status:** `released` (itch.io link) — bump the tags/pipeline line only if the
-Asset Store variant confirms Built-in/URP/HDRP support.
+**status:** `released` (published on itch.io).
 
 ## Notes
 
-⚠️ Content gap: still need the thumbnail asset and confirmation of whether the
-pack is on the Unity Asset Store.
+⚠️ Content gap: still need the thumbnail asset for `assets/images/`.

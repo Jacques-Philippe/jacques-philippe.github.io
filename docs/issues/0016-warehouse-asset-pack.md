@@ -20,8 +20,8 @@ Done looks like:
 
 - A new `Project` entry in `src/data/assets.ts` (slug `warehouse-asset-pack`),
   appended after the existing assets
-- Thumbnail added to `assets/images/` (e.g. `warehouse-asset-pack.png`) and
-  wired through the `thumbnail()` resolver
+- Thumbnail `assets/images/warehouse-thumbnail.png` (already added — a warehouse
+  aisle between pallet racks) wired through the `thumbnail()` resolver
 - Marketplace links: `kind: 'store'` for the Unity Asset Store, `kind: 'itch'`
   if also on itch.io; each `label`ed with the marketplace and variant where
   there is more than one, per the precedent set in issues 0012 and 0013
@@ -63,4 +63,4 @@ pallet jacks, plus the staff-room and signage details to finish the scene.
 
 ## Notes
 
-⚠️ Content gap: still need the thumbnail asset for `assets/images/`.
+All content is in hand — thumbnail, links, and copy. No open content gap.

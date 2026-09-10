@@ -6,7 +6,9 @@ import { thumbnail } from './thumbnails'
  *
  * Content gap: Pedometer's store URL and finished feature copy are still
  * pending, so it stays `coming-soon` — do not invent a store link or a
- * release date. Everything else here is published.
+ * release date. Everything else here is published. The Warehouse Asset Pack
+ * is on itch.io only (no Unity Asset Store listing yet) — do not add a
+ * `store` link until it ships there.
  */
 export const assets: Project[] = [
   {
@@ -103,6 +105,33 @@ export const assets: Project[] = [
       'Batch production for content-heavy puzzle games',
       'Built with mobile in mind',
       'Works in the Built-in, URP, and HDRP render pipelines',
+    ],
+  },
+  {
+    slug: 'warehouse-asset-pack',
+    title: 'Warehouse Asset Pack',
+    blurb:
+      'A low-poly warehouse and logistics pack — 147 flat-colour props covering pallet racking, loading docks, packing stations, pallet jacks, plus the staff-room and signage details to finish the scene.',
+    thumbnail: thumbnail('warehouse-thumbnail.png'),
+    tags: ['Unity', 'Low poly', '3D environment'],
+    links: [
+      {
+        kind: 'itch',
+        url: 'https://fromqcwithgamedev.itch.io/warehouse-pack-low-poly-warehouse-logistics-collection',
+        label: 'itch.io · Free & Full',
+      },
+      {
+        kind: 'video',
+        url: 'https://youtu.be/4b0AskV1DXw',
+        label: 'Trailer',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      '147 modular props across storage, receiving, packing, material handling, cold and hazmat storage, lighting, signage, and staff areas',
+      'Cozy, bright flat-colour style rather than industrial-harsh',
+      '50–6,000 triangles per prop, with contact-point pivots and grid-modular parts for fast placement — built for real-time, mobile, and VR',
+      'Free 15-prop starter tier, or the full 147-prop collection',
     ],
   },
 ]

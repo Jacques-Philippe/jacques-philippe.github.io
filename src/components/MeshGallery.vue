@@ -2,7 +2,7 @@
 /*
  * MeshGallery — grid + filters + URL sync + viewer orchestration (issue 0014).
  *
- * Two filters (segmented pack control + name search), both reflected in the URL
+ * Two filters (pack select + name search), both reflected in the URL
  * query so a filtered view is shareable. Selecting a card opens
  * <MeshViewerDialog>; the open mesh is deep-linkable via `?mesh=<slug>`.
  * Opening pushes a history entry (so Back closes the viewer in one step);
@@ -12,7 +12,13 @@
  */
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { meshBySlug, meshes, type Mesh, type PackId } from '../data/meshes'
+import {
+  meshBySlug,
+  meshes,
+  PACKS,
+  type Mesh,
+  type PackId,
+} from '../data/meshes'
 import MeshCard from './MeshCard.vue'
 import MeshViewerDialog from './MeshViewerDialog.vue'
 
@@ -21,13 +27,12 @@ const router = useRouter()
 
 type PackChoice = 'all' | PackId
 const PACK_CHOICES: { value: PackChoice; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'office', label: 'Office Pack' },
-  { value: 'warehouse', label: 'Warehouse Pack' },
+  { value: 'all', label: 'All packs' },
+  ...Object.values(PACKS).map((p) => ({ value: p.id, label: p.label })),
 ]
 
 function normalizePack(v: unknown): PackChoice {
-  return v === 'office' || v === 'warehouse' ? v : 'all'
+  return typeof v === 'string' && v in PACKS ? (v as PackId) : 'all'
 }
 
 const packFilter = ref<PackChoice>(normalizePack(route.query.pack))
@@ -134,24 +139,18 @@ onMounted(() => {
 <template>
   <div class="mesh-gallery">
     <div class="mesh-gallery__filters">
-      <div
-        class="mesh-gallery__segmented"
-        role="group"
-        aria-label="Filter by pack"
-      >
-        <button
-          v-for="choice in PACK_CHOICES"
-          :key="choice.value"
-          type="button"
-          class="mesh-gallery__seg"
-          :class="{ 'is-active': packFilter === choice.value }"
-          :aria-pressed="packFilter === choice.value"
-          :disabled="isOpen"
-          @click="packFilter = choice.value"
-        >
-          {{ choice.label }}
-        </button>
-      </div>
+      <label class="mesh-gallery__pack">
+        <span class="mesh-gallery__sr">Filter by pack</span>
+        <select v-model="packFilter" :disabled="isOpen">
+          <option
+            v-for="choice in PACK_CHOICES"
+            :key="choice.value"
+            :value="choice.value"
+          >
+            {{ choice.label }}
+          </option>
+        </select>
+      </label>
 
       <label class="mesh-gallery__search">
         <span class="mesh-gallery__sr">Search meshes by name</span>
@@ -198,34 +197,18 @@ onMounted(() => {
   margin-bottom: var(--space-6);
 }
 
-.mesh-gallery__segmented {
-  display: inline-flex;
+.mesh-gallery__pack select {
+  padding: var(--space-2) var(--space-3);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.mesh-gallery__seg {
-  padding: var(--space-2) var(--space-4);
-  border: 0;
-  border-left: 1px solid var(--border-strong);
   background: var(--surface);
-  color: var(--text-muted);
+  color: var(--text);
   font: inherit;
   font-size: var(--text-sm);
   cursor: pointer;
 }
 
-.mesh-gallery__seg:first-child {
-  border-left: 0;
-}
-
-.mesh-gallery__seg.is-active {
-  background: var(--accent);
-  color: var(--accent-contrast);
-}
-
-.mesh-gallery__seg:disabled {
+.mesh-gallery__pack select:disabled {
   opacity: 0.5;
   cursor: default;
 }

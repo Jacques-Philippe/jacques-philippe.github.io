@@ -1,20 +1,33 @@
 /*
  * Mesh gallery manifest (issue 0014 / docs/adr/0007).
  *
- * Free-tier meshes only, merged from the Office Pack and Warehouse Pack. This
- * file is an artifact copied from the pack repos, not a build output — CI here
- * has no access to the pack generators. Refresh steps: docs/mesh-gallery-refresh.md.
+ * Free-tier meshes only, merged from six packs: the Office and Warehouse
+ * environment packs, the Medieval Environment Pack, and the Medieval, Office,
+ * and Warehouse Characters Packs. This file is an artifact derived from the
+ * pack repos, not a build output — CI here has no access to them. Refresh
+ * steps: docs/mesh-gallery-refresh.md.
  *
- * `slug` is flat and globally unique across packs (the two packs share many
- * mesh names): it is the manifest key, the `?mesh=` query value, the card DOM
- * id, and the thumbnail filename (`<slug>.webp`). `node` is the name of the
- * node inside that pack's bundled `.glb`.
+ * `slug` is flat and globally unique across packs (packs share mesh names):
+ * it is the manifest key, the `?mesh=` query value, the card DOM id, and the
+ * thumbnail filename (`<slug>.webp`). `node` is the name of the node inside
+ * that pack's bundled `.glb`. Characters are baked to static rest-pose meshes
+ * at export, so every node is a plain static mesh.
  */
+import medievalCharactersPackGlb from '../../assets/models/medieval-characters-pack.glb?url'
+import medievalEnvironmentPackGlb from '../../assets/models/medieval-environment-pack.glb?url'
+import officeCharactersPackGlb from '../../assets/models/office-characters-pack.glb?url'
 import officePackGlb from '../../assets/models/office-pack.glb?url'
+import warehouseCharactersPackGlb from '../../assets/models/warehouse-characters-pack.glb?url'
 import warehousePackGlb from '../../assets/models/warehouse-pack.glb?url'
 import { thumbnail } from './thumbnails'
 
-export type PackId = 'office' | 'warehouse'
+export type PackId =
+  | 'office'
+  | 'warehouse'
+  | 'medieval-environment'
+  | 'medieval-characters'
+  | 'office-characters'
+  | 'warehouse-characters'
 
 export interface Pack {
   id: PackId
@@ -39,6 +52,16 @@ export interface Pack {
   }
 }
 
+// The three Characters Packs share one neutral daylight studio (their DESIGN.md
+// §8): a warm-white ~5500 K key from front-left and above, a cool sky fill.
+const CHARACTER_LIGHTING: Pack['lighting'] = {
+  key: { color: 0xffede0, intensity: 2.2, position: [-4, 6, 5] },
+  fill: { color: 0xc8d4ea, intensity: 0.5, position: [5, 2, -4] },
+  ambient: { color: 0xffffff, intensity: 0.15 },
+  background: 0x15171b,
+}
+
+// Insertion order is the pack filter's option order.
 export const PACKS: Record<PackId, Pack> = {
   office: {
     id: 'office',
@@ -74,6 +97,60 @@ export const PACKS: Record<PackId, Pack> = {
       background: 0x14140f,
     },
   },
+  'medieval-environment': {
+    id: 'medieval-environment',
+    label: 'Medieval Environment Pack',
+    shortLabel: 'Medieval',
+    glbUrl: medievalEnvironmentPackGlb,
+    // Asset Store listing still in review (docs/issues/0019) — itch.io until then.
+    cta: {
+      label: 'Get the Medieval Environment Pack →',
+      href: 'https://fromqcwithgamedev.itch.io/medieval-environment-pack',
+    },
+    lighting: {
+      // The pack's DESIGN.md §8 is still TODO: a warm afternoon-sun key with a
+      // cool sky fill, to suit the outdoor village props.
+      key: { color: 0xfff0d6, intensity: 2.2, position: [4, 6, 5] },
+      fill: { color: 0xcfe0f5, intensity: 0.55, position: [-5, 3, -4] },
+      ambient: { color: 0xffffff, intensity: 0.15 },
+      background: 0x141811,
+    },
+  },
+  'medieval-characters': {
+    id: 'medieval-characters',
+    label: 'Medieval Characters Pack',
+    shortLabel: 'Medieval Characters',
+    glbUrl: medievalCharactersPackGlb,
+    cta: {
+      label: 'Get the Medieval Characters Pack →',
+      href: 'https://assetstore.unity.com/packages/3d/characters/medieval-characters-pack-lite-411742',
+    },
+    lighting: CHARACTER_LIGHTING,
+  },
+  'office-characters': {
+    id: 'office-characters',
+    label: 'Office Characters Pack',
+    shortLabel: 'Office Characters',
+    glbUrl: officeCharactersPackGlb,
+    // Asset Store listing still in review (docs/issues/0019) — itch.io until then.
+    cta: {
+      label: 'Get the Office Characters Pack →',
+      href: 'https://fromqcwithgamedev.itch.io/office-characters-pack-low-poly-rigged-office-cast',
+    },
+    lighting: CHARACTER_LIGHTING,
+  },
+  'warehouse-characters': {
+    id: 'warehouse-characters',
+    label: 'Warehouse Characters Pack',
+    shortLabel: 'Warehouse Characters',
+    glbUrl: warehouseCharactersPackGlb,
+    // Asset Store listing still in review (docs/issues/0019) — itch.io until then.
+    cta: {
+      label: 'Get the Warehouse Characters Pack →',
+      href: 'https://fromqcwithgamedev.itch.io/warehouse-characters-pack-low-poly-rigged-warehouse-cast',
+    },
+    lighting: CHARACTER_LIGHTING,
+  },
 }
 
 export interface Mesh {
@@ -87,7 +164,7 @@ export interface Mesh {
   triangles: number
 }
 
-// Sorted pack-then-alpha (see below). Display names are hand-set — only 25 rows.
+// Sorted pack-then-alpha, packs in PACKS order. Display names are hand-set.
 const RAW: Omit<Mesh, 'preview'>[] = [
   { slug: 'office-chair', name: 'Chair', pack: 'office', node: 'Chair', triangles: 998 },
   { slug: 'office-coffee-mug', name: 'Coffee Mug', pack: 'office', node: 'CoffeeMug', triangles: 272 },
@@ -114,6 +191,42 @@ const RAW: Omit<Mesh, 'preview'>[] = [
   { slug: 'warehouse-sectional-overhead-door', name: 'Sectional Overhead Door', pack: 'warehouse', node: 'SectionalOverheadDoor', triangles: 1116 },
   { slug: 'warehouse-shipped-parcel', name: 'Shipped Parcel', pack: 'warehouse', node: 'ShippedParcel', triangles: 220 },
   { slug: 'warehouse-stacking-tote', name: 'Stacking Tote', pack: 'warehouse', node: 'StackingTote', triangles: 404 },
+  { slug: 'medieval-environment-barrel', name: 'Barrel', pack: 'medieval-environment', node: 'SM_Barrel', triangles: 134 },
+  { slug: 'medieval-environment-bench-wood', name: 'Wooden Bench', pack: 'medieval-environment', node: 'SM_Bench_Wood', triangles: 36 },
+  { slug: 'medieval-environment-bucket', name: 'Bucket', pack: 'medieval-environment', node: 'SM_Bucket', triangles: 148 },
+  { slug: 'medieval-environment-bush', name: 'Bush', pack: 'medieval-environment', node: 'SM_Bush', triangles: 40 },
+  { slug: 'medieval-environment-crate', name: 'Crate', pack: 'medieval-environment', node: 'SM_Crate', triangles: 156 },
+  { slug: 'medieval-environment-door-single', name: 'Single Door', pack: 'medieval-environment', node: 'SM_Door_Single', triangles: 48 },
+  { slug: 'medieval-environment-fence-wood-2m', name: 'Wooden Fence — 2 m', pack: 'medieval-environment', node: 'SM_Fence_Wood_2m', triangles: 60 },
+  { slug: 'medieval-environment-flowers', name: 'Flowers', pack: 'medieval-environment', node: 'SM_Flowers', triangles: 148 },
+  { slug: 'medieval-environment-grass-tuft', name: 'Grass Tuft', pack: 'medieval-environment', node: 'SM_Grass_Tuft', triangles: 28 },
+  { slug: 'medieval-environment-hay-bale', name: 'Hay Bale', pack: 'medieval-environment', node: 'SM_Hay_Bale', triangles: 36 },
+  { slug: 'medieval-environment-house-small', name: 'Small House', pack: 'medieval-environment', node: 'SM_House_Small', triangles: 200 },
+  { slug: 'medieval-environment-log', name: 'Log', pack: 'medieval-environment', node: 'SM_Log', triangles: 78 },
+  { slug: 'medieval-environment-rock-large', name: 'Large Rock', pack: 'medieval-environment', node: 'SM_Rock_Large', triangles: 20 },
+  { slug: 'medieval-environment-rock-small', name: 'Small Rock', pack: 'medieval-environment', node: 'SM_Rock_Small', triangles: 40 },
+  { slug: 'medieval-environment-sack', name: 'Sack', pack: 'medieval-environment', node: 'SM_Sack', triangles: 60 },
+  { slug: 'medieval-environment-signpost', name: 'Signpost', pack: 'medieval-environment', node: 'SM_Signpost', triangles: 48 },
+  { slug: 'medieval-environment-table-wood', name: 'Wooden Table', pack: 'medieval-environment', node: 'SM_Table_Wood', triangles: 60 },
+  { slug: 'medieval-environment-tree-oak', name: 'Oak Tree', pack: 'medieval-environment', node: 'SM_Tree_Oak', triangles: 80 },
+  { slug: 'medieval-environment-tree-pine', name: 'Pine Tree', pack: 'medieval-environment', node: 'SM_Tree_Pine', triangles: 56 },
+  { slug: 'medieval-environment-tree-stump', name: 'Tree Stump', pack: 'medieval-environment', node: 'SM_Tree_Stump', triangles: 72 },
+  { slug: 'medieval-environment-wall-stone-4m', name: 'Stone Wall — 4 m', pack: 'medieval-environment', node: 'SM_Wall_Stone_4m', triangles: 84 },
+  { slug: 'medieval-environment-wall-stone-pillar', name: 'Stone Wall Pillar', pack: 'medieval-environment', node: 'SM_Wall_Stone_Pillar', triangles: 84 },
+  { slug: 'medieval-environment-well', name: 'Well', pack: 'medieval-environment', node: 'SM_Well', triangles: 128 },
+  { slug: 'medieval-characters-archer', name: 'Archer', pack: 'medieval-characters', node: 'Archer', triangles: 2484 },
+  { slug: 'medieval-characters-farmer', name: 'Farmer', pack: 'medieval-characters', node: 'Farmer', triangles: 2576 },
+  { slug: 'medieval-characters-knight', name: 'Knight', pack: 'medieval-characters', node: 'Knight', triangles: 2092 },
+  { slug: 'medieval-characters-town-guard', name: 'Town Guard', pack: 'medieval-characters', node: 'TownGuard', triangles: 2388 },
+  { slug: 'medieval-characters-wizard', name: 'Wizard', pack: 'medieval-characters', node: 'Wizard', triangles: 2256 },
+  { slug: 'office-characters-janitor', name: 'Janitor', pack: 'office-characters', node: 'Janitor', triangles: 2192 },
+  { slug: 'office-characters-manager', name: 'Manager', pack: 'office-characters', node: 'Manager', triangles: 2196 },
+  { slug: 'office-characters-office-worker', name: 'Office Worker', pack: 'office-characters', node: 'OfficeWorker', triangles: 1876 },
+  { slug: 'office-characters-receptionist', name: 'Receptionist', pack: 'office-characters', node: 'Receptionist', triangles: 2036 },
+  { slug: 'warehouse-characters-forklift-operator', name: 'Forklift Operator', pack: 'warehouse-characters', node: 'ForkliftOperator', triangles: 2322 },
+  { slug: 'warehouse-characters-picker', name: 'Picker', pack: 'warehouse-characters', node: 'Picker', triangles: 1956 },
+  { slug: 'warehouse-characters-supervisor', name: 'Supervisor', pack: 'warehouse-characters', node: 'Supervisor', triangles: 1806 },
+  { slug: 'warehouse-characters-warehouse-worker', name: 'Warehouse Worker', pack: 'warehouse-characters', node: 'WarehouseWorker', triangles: 1564 },
 ]
 
 export const meshes: Mesh[] = RAW.map((m) => ({

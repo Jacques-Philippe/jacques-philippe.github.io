@@ -51,7 +51,7 @@ function retry() {
   viewerKey.value++
 }
 
-// The renderer is already live and both packs are loaded, so a prev/next swap
+// The renderer is already live and every pack is loaded, so a prev/next swap
 // is instant — no need to drop back to the loading state.
 function goPrev() {
   if (hasPrev.value) emit('prev')

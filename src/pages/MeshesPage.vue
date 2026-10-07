@@ -9,7 +9,7 @@ useHead({
     {
       name: 'description',
       content:
-        'Browse the free-tier meshes from the Office Pack and Warehouse Pack and inspect any one of them in an interactive 3D viewer.',
+        'Browse the free-tier meshes and characters from my low-poly Unity asset packs and inspect any one of them in an interactive 3D viewer.',
     },
   ],
 })

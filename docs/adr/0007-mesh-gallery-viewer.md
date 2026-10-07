@@ -73,6 +73,27 @@ sync with a taxonomy that doesn't exist. It is reconstructable later from the
 sources are already foldered by area) if the catalogue ever grows enough to
 need it.
 
+## Update (issue 0018): six packs, a `<select>` filter, an export tool here
+
+The gallery now also carries the Medieval Environment Pack and the Medieval,
+Office, and Warehouse Characters Packs — 61 Free-tier meshes across six packs.
+Three things above changed with that:
+
+- **The pack filter is a native `<select>`**, generated from `PACKS`. Six labels
+  do not fit a segmented control on a narrow screen. Still no category filter.
+- **Those four packs are exported by `tools/build_pack_web_glb.py` in this
+  repo**, not by a target in each pack repo. It converts the pack's already-built
+  Free-tier `.fbx` files (the loose meshes its itch.io build writes) into the
+  `.glb` and previews. It never runs a pack's generators and reads only the
+  assets in `kit.json` `tiers.free.assets`, so the reasoning under "Free-tier
+  meshes only" holds, and the script itself contains nothing pack-specific.
+- **Rigged characters are baked to static rest-pose meshes at export** — the
+  armature is dropped and bone-parented props are joined in — so the viewer
+  still only ever clones a plain static node.
+
+All six `.glb` files (~520 KB together) are still fetched when the viewer
+first opens, which keeps prev/next instant across packs.
+
 ## Consequences
 
 - The gallery component tree is client-only past the initial grid: `three` is

@@ -116,7 +116,7 @@ async function setup() {
 
   started.value = true
 
-  // Fetch both packs so the first selection and every prev/next is instant.
+  // Fetch every pack so the first selection and every prev/next is instant.
   const packIds = Object.keys(PACKS) as (keyof typeof PACKS)[]
   try {
     await Promise.all(

@@ -8,7 +8,10 @@ import { thumbnail } from './thumbnails'
  * pending, so it stays `coming-soon` — do not invent a store link or a
  * release date. Everything else here is published. The Warehouse Asset Pack
  * is on itch.io only (no Unity Asset Store listing yet) — do not add a
- * `store` link until it ships there.
+ * `store` link until it ships there. The Medieval Environment, Office
+ * Characters, and Warehouse Characters packs are submitted to the Asset Store
+ * and awaiting review — same rule, no `store` link until each is approved
+ * (docs/issues/0019).
  */
 export const assets: Project[] = [
   {
@@ -132,6 +135,124 @@ export const assets: Project[] = [
       'Cozy, bright flat-colour style rather than industrial-harsh',
       '50–6,000 triangles per prop, with contact-point pivots and grid-modular parts for fast placement — built for real-time, mobile, and VR',
       'Free 15-prop starter tier, or the full 147-prop collection',
+    ],
+  },
+  {
+    slug: 'medieval-environment-pack',
+    title: 'Medieval Environment Pack',
+    blurb:
+      'A low-poly medieval world in 114 flat-colour meshes — castle walls and towers, a royal keep, tavern, chapel, smithy, and market stalls, plus the props, goods, and nature to fill a walled town and the woods around it.',
+    thumbnail: thumbnail('medieval-environment-pack.png'),
+    tags: ['Unity', 'Low poly', '3D environment'],
+    links: [
+      {
+        kind: 'itch',
+        url: 'https://fromqcwithgamedev.itch.io/medieval-environment-pack',
+        label: 'itch.io · Free & Full',
+      },
+      {
+        kind: 'video',
+        url: 'https://youtu.be/248o-EBbUPg',
+        label: 'Trailer',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      '114 meshes: enough for a walled castle town with its keep, market, tavern, chapel, smithy, and farm',
+      'Walls snap on a 4 m grid; doorways and gates sized for the Medieval Characters Pack cast',
+      'Plain .fbx with materials baked in and no texture maps — works in Unity, Godot, Unreal, and Blender',
+      'Free 23-mesh hamlet starter tier, or the full 114-mesh collection',
+    ],
+  },
+  {
+    slug: 'medieval-characters-pack',
+    title: 'Medieval Characters Pack',
+    blurb:
+      'A low-poly medieval cast of 23 rigged characters on one shared Mixamo-compatible skeleton — knights, royalty, villagers, clergy, rogues, and mages.',
+    thumbnail: thumbnail('medieval-characters-pack.png'),
+    tags: ['Unity', 'Low poly', 'Characters', 'Rigged'],
+    links: [
+      {
+        kind: 'store',
+        url: 'https://assetstore.unity.com/packages/3d/characters/medieval-characters-pack-lite-411742',
+        label: 'Asset Store · Free',
+      },
+      {
+        kind: 'store',
+        url: 'https://assetstore.unity.com/packages/3d/characters/medieval-characters-pack-pro-411746',
+        label: 'Asset Store · Full',
+      },
+      {
+        kind: 'itch',
+        url: 'https://fromqcwithgamedev.itch.io/medieval-characters-pack-low-poly-rigged-medieval-cast',
+        label: 'itch.io · Free & Full',
+      },
+      {
+        kind: 'video',
+        url: 'https://youtu.be/WOnKgh80-0c',
+        label: 'Trailer',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      '23 characters on one 25-bone skeleton with Unity Humanoid bone names — one animation set drives the whole cast',
+      'Held props (sword, shield, bow, staff, lute…) are separate meshes parented to hand bones, so they can be hidden or swapped',
+      'Roughly 1,700–3,300 triangles per character including props',
+      'Free 5-character starter tier (Knight, Archer, Wizard, Farmer, Town Guard), or the full cast of 23',
+    ],
+  },
+  {
+    slug: 'office-characters-pack',
+    title: 'Office Characters Pack',
+    blurb:
+      'A low-poly office cast of 16 rigged characters on one Mixamo-compatible skeleton — the people at the desks, the people who run the place, and the people who keep the building going.',
+    thumbnail: thumbnail('office-characters-pack.png'),
+    tags: ['Unity', 'Low poly', 'Characters', 'Rigged'],
+    links: [
+      {
+        kind: 'itch',
+        url: 'https://fromqcwithgamedev.itch.io/office-characters-pack-low-poly-rigged-office-cast',
+        label: 'itch.io · Free & Full',
+      },
+      {
+        kind: 'video',
+        url: 'https://youtu.be/e7-hCV7xAYc',
+        label: 'Trailer',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      '16 characters on the same 25-bone Humanoid skeleton as the other Characters Packs — casts can share a scene and an animation set',
+      'Made for office, tycoon, simulation, and comedy games',
+      'Plain .fbx with materials baked in and no texture maps',
+      'Free 4-character starter tier (Office Worker, Receptionist, Manager, Janitor), or the full cast of 16',
+    ],
+  },
+  {
+    slug: 'warehouse-characters-pack',
+    title: 'Warehouse Characters Pack',
+    blurb:
+      'A low-poly warehouse cast of 17 rigged characters on one Mixamo-compatible skeleton — the people on the floor, at the dock doors, and keeping the site running.',
+    thumbnail: thumbnail('warehouse-characters-pack.png'),
+    tags: ['Unity', 'Low poly', 'Characters', 'Rigged'],
+    links: [
+      {
+        kind: 'itch',
+        url: 'https://fromqcwithgamedev.itch.io/warehouse-characters-pack-low-poly-rigged-warehouse-cast',
+        label: 'itch.io · Free & Full',
+      },
+      {
+        kind: 'video',
+        url: 'https://youtu.be/hJSyZPEtZHY',
+        label: 'Trailer',
+      },
+    ],
+    status: 'released',
+    highlights: [
+      '17 characters on the same 25-bone Humanoid skeleton as the other Characters Packs — casts can share a scene and an animation set',
+      'Made for warehouse, logistics, tycoon, and simulation games',
+      'Plain .fbx with materials baked in and no texture maps',
+      'Free 4-character starter tier (Warehouse Worker, Picker, Forklift Operator, Supervisor), or the full cast of 17',
     ],
   },
 ]
